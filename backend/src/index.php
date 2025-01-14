@@ -1,6 +1,7 @@
 <?php
-// Autoloader function to include class files automatically
+namespace App;
 require_once __DIR__ . '/../vendor/autoload.php';
+
 use App\Core\Router;
 
 spl_autoload_register(function ($class) {
