@@ -1,10 +1,10 @@
 <?php
 return [
     'db' => [
-        'host' => 'db',
+        'host' => '95.46.96.15',
         'port' => '3306',
-        'dbname' => 'my_database',
-        'user' => 'user',
-        'password' => 'password',
+        'dbname' => 'wwwtoefl_scandiweb_db',
+        'user' => 'wwwtoefl_toefltes_api_acess',
+        'password' => '998977616958a',
     ],
 ];

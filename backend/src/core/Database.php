@@ -1,5 +1,6 @@
 <?php
 namespace App\Core;
+use \PDO;
 class Database {
     private static $pdo = null;
 
@@ -8,7 +9,7 @@ class Database {
             $config = include(__DIR__ . '/../config.php');
             $dbConfig = $config['db'];
             
-            $dsn = "mysql:host={$dbConfig['host']};port={$dbConfig['port']};dbname={$dbConfig['dbname']}";
+            $dsn = "mysql:host={$dbConfig['host']};dbname={$dbConfig['dbname']}";
             try {
                 self::$pdo = new PDO($dsn, $dbConfig['user'], $dbConfig['password']);
                 

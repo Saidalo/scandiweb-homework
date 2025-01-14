@@ -2,6 +2,7 @@
 namespace App\Core;
 
 use \PDO;
+use App\Core\Database;
 class Model {
     protected $db;
 
@@ -30,13 +31,7 @@ class Model {
         $connection = null;
 
         try {
-            $connection = new PDO(
-                'mysql:host=db;port=3306;dbname=my_database;charset=utf8',
-                'user',
-                'password'
-            );
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $connection;
+            return Database::getConnection();
         } catch (PDOException $e) {
             if ($retries == 0) {
                 die("Database connection failed: " . $e->getMessage());
