@@ -17,6 +17,7 @@ class HomeController extends Controller {
         $data = ['title' => 'Home Page'];
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             header('Access-Control-Allow-Origin: http://localhost:3000'); // Update with the frontend origin
+            header('Access-Control-Allow-Origin: https://scandiweb-homework.onrender.com/');
             header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
             header('Access-Control-Allow-Headers: Content-Type, Authorization');
             header('Access-Control-Max-Age: 86400'); // Cache the preflight response for 1 day
