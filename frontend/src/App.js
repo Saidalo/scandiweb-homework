@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/graphql", {
+        const response = await fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

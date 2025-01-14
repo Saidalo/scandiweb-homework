@@ -50,7 +50,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
         }
       `;
 
-      fetch("http://localhost:8080/graphql", {
+      fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
