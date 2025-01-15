@@ -14,19 +14,6 @@ use App\Services\ProductService;
 
 class HomeController extends Controller {
     public function index() {
-        $data = ['title' => 'Home Page'];
-        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-            header('Access-Control-Allow-Origin: https://scandiweb-homework.onrender.com/');
-            header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-            header('Access-Control-Allow-Headers: Content-Type, Authorization');
-            header('Access-Control-Max-Age: 86400'); // Cache the preflight response for 1 day
-            exit(0); // Terminate further script execution for OPTIONS requests
-        }
-    
-        header('Access-Control-Allow-Origin: *'); // Replace with your frontend URL for production
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
-        header('Content-Type: application/json');
         
         $rawData = file_get_contents('php://input');
 
