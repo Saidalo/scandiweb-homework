@@ -1,8 +1,8 @@
 <?php
-namespace App\Core;
+namespace App\core;
 
 use \PDO;
-use App\Core\Database;
+use App\core\Database;
 class Model {
     protected $db;
 

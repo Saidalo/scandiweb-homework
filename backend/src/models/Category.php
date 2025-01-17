@@ -1,6 +1,6 @@
 <?php
-namespace App\Models;
-use App\Core\Model;
+namespace App\models;
+use App\core\Model;
 use \PDO;
 class Category extends Model {
     public static function all() {

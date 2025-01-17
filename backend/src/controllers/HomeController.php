@@ -1,16 +1,16 @@
 <?php
-namespace App\Controllers;
+namespace App\controllers;
 require_once __DIR__ . '/../../vendor/autoload.php';
 use GraphQL\Type\Schema;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\InputObjectType;
 use GraphQL\GraphQL;
-use App\Core\Controller;
-use App\Models\Category;
-use App\Models\Product;
-use App\Models\Order;
-use App\Services\ProductService;
+use App\core\Controller;
+use App\models\Category;
+use App\models\Product;
+use App\models\Order;
+use App\services\ProductService;
 
 class HomeController extends Controller {
     public function index() {
