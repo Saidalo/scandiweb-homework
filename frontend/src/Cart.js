@@ -86,7 +86,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
                     <button
                         key={idx}
                         className={`size-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
-                        data-testid={`cart-item-attribute-${attribute.name}-${attribute.name}${isSelected(attr, item.selectedAttributes, attribute.name) === 'selected' ? '-selected': ''}`}
+                        data-testid={`cart-item-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}${isSelected(attr, item.selectedAttributes, attribute.name) === 'selected' ? '-selected': ''}`}
                     >
                         {attr.value}
                     </button>

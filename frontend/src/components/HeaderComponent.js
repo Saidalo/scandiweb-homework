@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const HeaderComponent = ({categories, size, showCart}) => {
     return (
-        <header className="header" data-testid='category-link'>
+        <header className="header">
             <nav>
                 {categories && categories.map((categoty) => <a href="#" className={categoty.name==='all' ? 'active' : ' navogation'} data-testid={categoty.name==='all' ? 'active-category-link' : 'category-link'}>{categoty.name.toUpperCase()}</a>)}
             </nav>
