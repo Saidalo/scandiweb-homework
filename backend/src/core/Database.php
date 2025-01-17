@@ -1,5 +1,5 @@
 <?php
-namespace App\core;
+namespace App\Core;
 use \PDO;
 class Database {
     private static $pdo = null;

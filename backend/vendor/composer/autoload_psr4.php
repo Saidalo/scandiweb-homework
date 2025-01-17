@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'GraphQL\\' => array($vendorDir . '/webonyx/graphql-php/src'),
+    'App\\' => array($baseDir . '/src'),
 );

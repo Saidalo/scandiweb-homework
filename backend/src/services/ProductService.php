@@ -1,6 +1,6 @@
 <?php
-namespace App\services;
-use App\models\Product;
+namespace App\Services;
+use App\Models\Product;
 use stdClass;
 
 class ProductService {

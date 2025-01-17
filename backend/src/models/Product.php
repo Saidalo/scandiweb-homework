@@ -1,6 +1,6 @@
 <?php
-namespace App\models;
-use App\core\Model;
+namespace App\Models;
+use App\Core\Model;
 use \PDO;
 class Product extends Model {
     public static function getAll($category = "all", $id = null) {

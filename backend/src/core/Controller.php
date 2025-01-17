@@ -1,5 +1,5 @@
 <?php
-namespace App\core;
+namespace App\Core;
 
 class Controller {
     public function render($view, $data = []) {

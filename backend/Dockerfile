@@ -25,7 +25,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install graphQl-php
 RUN composer install
 
-RUN composer dump-autoload
+RUN composer dump-autoload --optimize
 
 
 # Set working directory
