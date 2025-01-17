@@ -1,8 +1,6 @@
 <?php
 namespace App;
 require_once __DIR__ . '/../vendor/autoload.php';
-// Manually include the Router class
-require_once __DIR__ . '/core/Router.php';
 use App\Core\Router;
 
 
