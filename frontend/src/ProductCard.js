@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 function ProductCard({ name, price, image, inStock, id }) {
   const params= useParams();
   return (
-    <div className="product-card" >
+    <div className="product-card" data-testid={`product-${name.toLowerCase().replace(/\s+/g, '-')}`}>
       <Link to={`/product/${id}`}>
       <img src={image} alt={name} />
       {!inStock && <div className="out-of-stock">OUT OF STOCK</div>}

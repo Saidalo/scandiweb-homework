@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router';
 import "./ProductPage.css";
-import ToggleSwitch from "../ToggleComponent/SwitchToggle";
+import parse from 'html-react-parser';
 
 const ProductPage = ({products, isCartVisible, setCartItems}) => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -128,7 +128,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
         </div>
 
         {/* Main Image */}
-        <div className="main-image">
+        <div className="main-image" data-testid='product-gallery'>
           <button className="arrow left" onClick={() => setPrevPage()}>&#8592;</button>
           <img src={product.images[selectedImage]} alt="Selected" />
           <button className="arrow right" onClick={() => setNextPage()}>&#8594;</button>
@@ -139,21 +139,19 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
           <h1>{product.title}</h1>
 
           {product.attributes.map((attribute, index) => (
-            <div className={`product-${attribute.name.toLowerCase()}`} key={index}>
+            <div className={`product-${attribute.name.toLowerCase()}`} key={index} data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <strong>{attribute.name.toUpperCase()}:</strong>
                 {attribute.items.map((size, idx) => (<button className={isSelected(attribute.name, size)} key={idx} onClick={() => setAttributeValue(attribute.name, size)}>{size.value}</button>))}
             </div>
           ))}
 
-          {/* <ToggleSwitch /> */}
-
           <p className="product-price">
             <strong>PRICE:</strong> {product.price}
           </p>
 
-          <button className="add-to-cart-page" onClick={addToCart}>ADD TO CART</button>
+          <button className="add-to-cart-page" onClick={addToCart} data-testid='add-to-cart'>ADD TO CART</button>
 
-          <p className="product-description" dangerouslySetInnerHTML={{__html: product.description}}/>
+          <p className="product-description" data-testid='product-description'>{parse(product.description)}</p>
         </div>
       </div>
     </div>
