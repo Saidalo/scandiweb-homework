@@ -135,7 +135,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
         </div>
 
         {/* Product Details */}
-        <div className="product-details">
+        <div className="product-details" data-testid={`product-${product.title.toLowerCase().replace(/\s+/g, '-')}`}>
           <h1>{product.title}</h1>
 
           {product.attributes.map((attribute, index) => (
