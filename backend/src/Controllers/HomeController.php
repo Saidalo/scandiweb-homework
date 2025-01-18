@@ -97,8 +97,11 @@ class HomeController extends Controller {
                     'products' => [
                         'type' => Type::listOf($productType),
                         'description' => 'List of products',
-                        'resolve' => function() {
-                            $products = ProductService::assertProductProperties(Product::getAll());
+                        'args' => [
+                            'category' => Type::nonNull(Type::string()),
+                        ],
+                        'resolve' => function($root, $args) {
+                            $products = ProductService::assertProductProperties(Product::getAll($args['category']));
                             return $products;
                         }
                     ],

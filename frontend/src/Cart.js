@@ -65,7 +65,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
       .catch((err) => console.error(err));
     }
     return (
-    <div className="cart-container" data-testid='cart-btn'>
+    <div className="cart-container" data-testid='cart-overlay'>
       <h2 className="cart-title">My Bag, {items.length} items</h2>
       <div className="cart-items">
         {uniqueItems.map((item, index) => (
