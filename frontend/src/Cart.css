@@ -50,13 +50,14 @@
     margin: 5px 0;
   }
   
-  .size-options, .color-options {
+  .size-options, .color-options, .capacity-options {
     display: flex;
     align-items: center;
     gap: 5px;
     margin-bottom: 5px;
   }
-  
+
+  .capacity-button,
   .size-button {
     border: 1px solid #ccc;
     padding: 5px;
@@ -64,21 +65,26 @@
     cursor: pointer;
     background-color: white;
   }
+
+  .color-button {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .color-button.selected {
+    border: 2px solid red;
+  }
   
-  .size-button.selected {
+  .size-button.selected,
+  .capacity-button.selected {
     border-color: #000;
     color: white;
     background-color: #000;
     font-weight: bold;
   }
   
-  .color-button {
-    width: 20px;
-    height: 20px;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
   
   .bottom-row {
     display: flex;

@@ -2,7 +2,6 @@ import React from "react";
 import CartIcon from "../CartIcon";
 
 const HeaderComponent = ({categories, size, showCart}) => {
-    console.log('from header', window.location.pathname);
     const isActive = (name) => {
         return window.location.pathname === `/${name}`;
     }

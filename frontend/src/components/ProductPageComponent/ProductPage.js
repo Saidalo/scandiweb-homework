@@ -105,7 +105,11 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
         return selectedAttr[attributeName] === attribute.id ? 'selected' : '';
     }
     return  '';
-  } 
+  }
+  
+  const isNotColor = (attributeName) => {
+    return attributeName !== 'color';
+  }
 
   const addToCart = () => {
     productElement['selectedAttributes'] = selectedAttr;
@@ -141,7 +145,13 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
           {product.attributes.map((attribute, index) => (
             <div className={`product-${attribute.name.toLowerCase()}`} key={index} data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <strong>{attribute.name.toUpperCase()}:</strong>
-                {attribute.items.map((size, idx) => (<button className={isSelected(attribute.name, size)} key={idx} onClick={() => setAttributeValue(attribute.name, size)}>{size.value}</button>))}
+                {attribute.items.map((size, idx) => 
+                  (<button 
+                      className={isSelected(attribute.name, size)} 
+                      key={idx} 
+                      onClick={() => setAttributeValue(attribute.name, size)}
+                      style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: size.value}}
+                    >{isNotColor(attribute.name.toLowerCase()) ? size.value : ""}</button>))}
             </div>
           ))}
 
