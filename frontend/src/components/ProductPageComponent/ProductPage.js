@@ -17,7 +17,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/graphql", {
+        const response = await fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
     };
 
     fetchData();
-  }, []);
+  }, [params]);
   
   const [selectedAttr, setSelectedAttr] = useState({});
 
@@ -102,10 +102,14 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
 
   const isSelected = (attributeName, attribute) => {
     if(selectedAttr.hasOwnProperty(attributeName)) {
-        return selectedAttr[attributeName] == attribute.id ? 'selected' : '';
+        return selectedAttr[attributeName] === attribute.id ? 'selected' : '';
     }
     return  '';
-  } 
+  }
+  
+  const isNotColor = (attributeName) => {
+    return attributeName !== 'color';
+  }
 
   const addToCart = () => {
     productElement['selectedAttributes'] = selectedAttr;
@@ -141,7 +145,13 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
           {product.attributes.map((attribute, index) => (
             <div className={`product-${attribute.name.toLowerCase()}`} key={index} data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <strong>{attribute.name.toUpperCase()}:</strong>
-                {attribute.items.map((size, idx) => (<button className={isSelected(attribute.name, size)} key={idx} onClick={() => setAttributeValue(attribute.name, size)}>{size.value}</button>))}
+                {attribute.items.map((size, idx) => 
+                  (<button 
+                      className={isSelected(attribute.name, size)} 
+                      key={idx} 
+                      onClick={() => setAttributeValue(attribute.name, size)}
+                      style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: size.value}}
+                    >{isNotColor(attribute.name.toLowerCase()) ? size.value : ""}</button>))}
             </div>
           ))}
 

@@ -113,12 +113,14 @@ body {
   }
   
   .product-size,
-  .product-colors {
+  .product-color {
     display: flex;
     align-items: center;
     margin: 15px 0;
   }
   
+  .product-color button,
+  .product-capacity button,
   .product-size button,
   .color-box {
     margin: 0 5px;
@@ -128,11 +130,18 @@ body {
     background: white;
   }
   
+  .product-capacity button:hover,
   .product-size button:hover,
   .color-box:hover,
-  .product-size button.selected {
+  .product-size button.selected,
+  .product-capacity button.selected {
     background-color: black;
     color: white;
+  }
+
+  .product-color button.selected,
+  .product-color button:hover {
+    border: 2px solid red;
   }
   
   .color-box {

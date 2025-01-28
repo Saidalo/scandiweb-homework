@@ -37,6 +37,10 @@ const Cart = ({ items, updateItems, clearCart }) => {
 
     const uniqueItems = filterDistinctItemsWithQuantity(items);
 
+    const isNotColor = (attributeName) => {
+      return attributeName !== 'color';
+    }
+
     const placeOrder = () => {
       const mutationQuery = `
         mutation {
@@ -50,7 +54,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
         }
       `;
 
-      fetch("http://localhost:8080/graphql", {
+      fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,15 +86,17 @@ const Cart = ({ items, updateItems, clearCart }) => {
               {item.attributes && item.attributes.map((attribute, i) => 
                 <div className={`${attribute.name.toLowerCase()}-options`} key={i} data-testid={`cart-item-attribute-${attribute.name}`}>
                     <p>{attribute.name}:</p>
-                    {attribute.items.map((attr, idx) => (
+                    {attribute.items.map((attr, idx) => {
+                    return (
                     <button
                         key={idx}
-                        className={`size-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
+                        className={`${attribute.name.toLowerCase()}-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
                         data-testid={`cart-item-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}${isSelected(attr, item.selectedAttributes, attribute.name) === 'selected' ? '-selected': ''}`}
+                        style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: attr.value}}
                     >
-                        {attr.value}
+                        {isNotColor(attribute.name.toLowerCase()) ? attr.value : ""}
                     </button>
-                    ))}
+                    )})}
                 </div>
               )}
               <div className="bottom-row">

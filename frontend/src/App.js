@@ -9,13 +9,12 @@ import ProductPage from "./components/ProductPageComponent/ProductPage";
 function App() {
 
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
   const [isCartVisible, setIsCartVisible] = useState(false);
   const [cart, setCart] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/graphql", {
+        const response = await fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -26,29 +25,6 @@ function App() {
                 categories {
                   id
                   name
-                },
-                products {
-                  id
-                  name
-                  inStock
-                  gallery
-                  description
-                  category
-                  attributes {
-                    id
-                    items {
-                      display_value
-                      value
-                      id
-                    }
-                    name
-                    type
-                  }
-                  prices {
-                    amount
-                    currency
-                  }
-                  brand
                 }
               }
             `,
@@ -59,7 +35,6 @@ function App() {
 
         if (response.ok) {
           setCategories(data.data.categories);
-          setProducts(data.data.products);
         } else {
           console.error("Failed to fetch data:", data.errors);
         }
@@ -123,8 +98,9 @@ function App() {
       <HeaderComponent categories={categories} size={cart.length} showCart={showCart} />
       {isCartVisible && <Cart items={cart} updateItems={updateItems} clearCart={clearCart}/>}
       <Routes>
-        <Route path="/" element={<HomePage isCartVisible={isCartVisible} products={products} category={categories[0]} />} />
-        <Route path="/product/:id" element={<ProductPage isCartVisible={isCartVisible} products={products} setCartItems={addToCart}/>} />
+      <Route path="/" element={<HomePage isCartVisible={isCartVisible} />} />
+        <Route path="/:category" element={<HomePage isCartVisible={isCartVisible} />} />
+        <Route path="/product/:id" element={<ProductPage isCartVisible={isCartVisible} setCartItems={addToCart}/>} />
       </Routes>
     </div>
   );
