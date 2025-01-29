@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router';
 import ProductCard from "../../ProductCard";
 
-const HomePage = ({isCartVisible, category}) => {
+const HomePage = ({isCartVisible, setCartItems}) => {
     const [products, setProducts] = useState([]);
     const params = useParams();
     const header = params?.category ?? "all";
@@ -59,17 +59,24 @@ const HomePage = ({isCartVisible, category}) => {
     
         fetchData();
       }, [header]);
+    const addToCart = (product) => {
+      let selectedAttr = {};
+      product.attributes.forEach(element => {
+        selectedAttr[element.name] = element.items[0].id;
+      });
+      setCartItems({
+        ...product,
+        'selectedAttributes': selectedAttr
+      });
+    }
     return (<main className={`main ${isCartVisible ? 'blur': ''}`}>
         <h1>{header.toUpperCase()}</h1>
         <div className="product-list">
           {products.map((product) => (
             <ProductCard
               key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.prices[0]}
-              image={product.gallery[0]}
-              inStock={product.inStock}
+              product={product}
+              addToCart={addToCart}
             />
           ))}
         </div>

@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import "./ProductPage.css";
 import parse from 'html-react-parser';
 
-const ProductPage = ({products, isCartVisible, setCartItems}) => {
+const ProductPage = ({setCartItems}) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const params = useParams();
   const [productElement, setProductElement] = useState();
@@ -93,6 +93,16 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
     }
   }
 
+  function isEmpty(obj) {
+    for (var prop in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+        return false;
+      }
+    }
+  
+    return true
+  }
+
   const setAttributeValue = (attributeName, attribute) => {
     let selectedAttrUpdated = selectedAttr;
     selectedAttrUpdated[attributeName] = attribute.id
@@ -151,6 +161,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
                       key={idx} 
                       onClick={() => setAttributeValue(attribute.name, size)}
                       style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: size.value}}
+                      data-testid={`product-attribute-${attribute.name.toLowerCase()}-${size.value}`}
                     >{isNotColor(attribute.name.toLowerCase()) ? size.value : ""}</button>))}
             </div>
           ))}
@@ -159,7 +170,7 @@ const ProductPage = ({products, isCartVisible, setCartItems}) => {
             <strong>PRICE:</strong> {product.price}
           </p>
 
-          <button className="add-to-cart-page" onClick={addToCart} data-testid='add-to-cart'>ADD TO CART</button>
+          <button className="add-to-cart-page" onClick={addToCart} data-testid='add-to-cart' disabled={isEmpty(selectedAttr)} style={{background: isEmpty(selectedAttr) ? "rgba(85, 85, 85, 0.5)" : "#52D67A"}}>ADD TO CART</button>
 
           <p className="product-description" data-testid='product-description'>{parse(product.description)}</p>
         </div>

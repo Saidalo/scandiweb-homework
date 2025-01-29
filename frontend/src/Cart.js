@@ -91,7 +91,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
                     <button
                         key={idx}
                         className={`${attribute.name.toLowerCase()}-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
-                        data-testid={`cart-item-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}${isSelected(attr, item.selectedAttributes, attribute.name) === 'selected' ? '-selected': ''}`}
+                        data-testid={`product-attribute-${attribute.name.toLowerCase()}-${attr.value}`}
                         style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: attr.value}}
                     >
                         {isNotColor(attribute.name.toLowerCase()) ? attr.value : ""}
