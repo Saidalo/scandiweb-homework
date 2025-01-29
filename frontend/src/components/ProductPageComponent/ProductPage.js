@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import "./ProductPage.css";
 import parse from 'html-react-parser';
 
-const ProductPage = ({products, isCartVisible, setCartItems}) => {
+const ProductPage = ({setCartItems}) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const params = useParams();
   const [productElement, setProductElement] = useState();

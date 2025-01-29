@@ -98,9 +98,9 @@ function App() {
       <HeaderComponent categories={categories} size={cart.length} showCart={showCart} />
       {isCartVisible && <Cart items={cart} updateItems={updateItems} clearCart={clearCart}/>}
       <Routes>
-      <Route path="/" element={<HomePage isCartVisible={isCartVisible} />} />
-        <Route path="/:category" element={<HomePage isCartVisible={isCartVisible} />} />
-        <Route path="/product/:id" element={<ProductPage isCartVisible={isCartVisible} setCartItems={addToCart}/>} />
+      <Route path="/" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} />} />
+        <Route path="/:category" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} />} />
+        <Route path="/product/:id" element={<ProductPage setCartItems={addToCart}/>} />
       </Routes>
     </div>
   );
