@@ -61,13 +61,15 @@ const HomePage = ({isCartVisible, setCartItems}) => {
       }, [header]);
     const addToCart = (product) => {
       let selectedAttr = {};
-      product.attributes.forEach(element => {
-        selectedAttr[element.name] = element.items[0].id;
-      });
-      setCartItems({
-        ...product,
-        'selectedAttributes': selectedAttr
-      });
+      if(!isCartVisible) {
+        product.attributes.forEach(element => {
+          selectedAttr[element.name] = element.items[0].id;
+        });
+        setCartItems({
+          ...product,
+          'selectedAttributes': selectedAttr
+        });
+      }
     }
     return (<main className={`main ${isCartVisible ? 'blur': ''}`}>
         <h1>{header.toUpperCase()}</h1>

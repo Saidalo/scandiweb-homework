@@ -47,6 +47,7 @@ body {
     grid-template-columns: 1fr 3fr 2fr;
     gap: 20px;
     padding: 20px;
+    align-items: start;
   }
   
   /* Left Thumbnails */
@@ -54,11 +55,34 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 400px; /* Same height as .main-image */
+    overflow-y: auto;
+    scrollbar-width: thin; 
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  .image-thumbnails::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .image-thumbnails::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 0px;
+  }
+
+  /* Handle */
+  .image-thumbnails::-webkit-scrollbar-thumb {
+    background: #555;
+  }
+
+  /* Handle on hover */
+  .image-thumbnails::-webkit-scrollbar-thumb:hover {
+    background: #555; 
   }
   
   .image-thumbnails img {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     border: 2px solid transparent;
   }
@@ -84,6 +108,8 @@ body {
   
   .arrow {
     position: absolute;
+    width: 36px;
+    height: 36px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
@@ -119,22 +145,17 @@ body {
     margin: 15px 0;
   }
   
-  .product-color button,
-  .product-capacity button,
-  .product-size button,
+  .product-attribute button,
   .color-box {
-    margin: 0 5px;
+    margin: 5px 5px;
     padding: 10px;
     cursor: pointer;
     border: 1px solid black;
     background: white;
   }
   
-  .product-capacity button:hover,
-  .product-size button:hover,
-  .color-box:hover,
-  .product-size button.selected,
-  .product-capacity button.selected {
+  .product-attribute button:hover,
+  .product-attribute button.selected {
     background-color: black;
     color: white;
   }

@@ -143,9 +143,9 @@ const ProductPage = ({setCartItems}) => {
 
         {/* Main Image */}
         <div className="main-image" data-testid='product-gallery'>
-          <button className="arrow left" onClick={() => setPrevPage()}>&#8592;</button>
+          <button className="arrow left" onClick={() => setPrevPage()}>{'<'}</button>
           <img src={product.images[selectedImage]} alt="Selected" />
-          <button className="arrow right" onClick={() => setNextPage()}>&#8594;</button>
+          <button className="arrow right" onClick={() => setNextPage()}>{'>'}</button>
         </div>
 
         {/* Product Details */}
@@ -153,7 +153,7 @@ const ProductPage = ({setCartItems}) => {
           <h1>{product.title}</h1>
 
           {product.attributes.map((attribute, index) => (
-            <div className={`product-${attribute.name.toLowerCase()}`} key={index} data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}>
+            <div className={`product-attribute product-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`} key={index} data-testid={`product-attribute-${attribute.name.toLowerCase().replace(/\s+/g, '-')}`}>
                 <strong>{attribute.name.toUpperCase()}:</strong>
                 {attribute.items.map((size, idx) => 
                   (<button 
