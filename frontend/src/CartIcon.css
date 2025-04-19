@@ -6,6 +6,10 @@
     border: 0;
     background-color: inherit;
   }
+
+  .blur > .cart-icon-container {
+    background-color: initial;
+  }
   
   .cart-icon {
     width: 100%;

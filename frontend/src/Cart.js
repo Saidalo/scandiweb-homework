@@ -14,6 +14,10 @@ const Cart = ({ items, updateItems, clearCart }) => {
         return  '';
     }
 
+    const isYesNo = (item) => {
+      return (item.value.toLowerCase() === "yes" || item.value.toLowerCase() === "no") ? "yes-no" : null;
+    }
+
     const filterDistinctItemsWithQuantity = (items) => {
         const uniqueItemsMap = new Map();
         items.forEach((item) => {
@@ -90,7 +94,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
                     return (
                     <button
                         key={idx}
-                        className={`${attribute.name.toLowerCase()}-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
+                        className={`${isYesNo(attr) ?? attribute.name.toLowerCase()}-button ${isSelected(attr, item.selectedAttributes, attribute.name)}`}
                         data-testid={`product-attribute-${attribute.name.toLowerCase()}-${attr.value}`}
                         style={isNotColor(attribute.name.toLowerCase()) ? {} : {backgroundColor: attr.value}}
                     >

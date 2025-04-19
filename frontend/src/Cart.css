@@ -58,7 +58,8 @@
   }
 
   .capacity-button,
-  .size-button {
+  .size-button,
+  .yes-no-button {
     border: 1px solid #ccc;
     padding: 5px;
     font-size: 12px;
@@ -78,7 +79,8 @@
   }
   
   .size-button.selected,
-  .capacity-button.selected {
+  .capacity-button.selected,
+  .yes-no-button.selected {
     border-color: #000;
     color: white;
     background-color: #000;

@@ -106,7 +106,7 @@ function App() {
 
   return (
     <div className="App">
-      <HeaderComponent categories={categories} size={cart.length} showCart={showCart} />
+      <HeaderComponent categories={categories} size={cart.length} showCart={showCart} isCartVisible={isCartVisible} />
       {isCartVisible && <Cart items={cart} updateItems={updateItems} clearCart={clearCart} />}
       <Routes>
         <Route path="/" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} />} />

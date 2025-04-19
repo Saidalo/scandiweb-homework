@@ -1,12 +1,12 @@
 import React from "react";
 import CartIcon from "../CartIcon";
 
-const HeaderComponent = ({categories, size, showCart}) => {
+const HeaderComponent = ({categories, size, showCart, isCartVisible}) => {
     const isActive = (name) => {
         return window.location.pathname === `/${name}`;
     }
     return (
-        <header className="header">
+        <header className={`header ${isCartVisible ? 'blurr': ''}`}>
             <nav>
             {categories && categories.map((categoty, index) => 
             <a 
