@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router';
 import ProductCard from "../../ProductCard";
 
-const HomePage = ({isCartVisible, setCartItems}) => {
+const HomePage = ({isCartVisible, setCartItems, setIsCartVisible}) => {
     const [products, setProducts] = useState([]);
     const params = useParams();
     const header = params?.category ?? "all";
@@ -79,6 +79,8 @@ const HomePage = ({isCartVisible, setCartItems}) => {
               key={product.id}
               product={product}
               addToCart={addToCart}
+              isCartVisible={isCartVisible}
+              setIsCartVisible={() => setIsCartVisible()}
             />
           ))}
         </div>

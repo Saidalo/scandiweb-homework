@@ -1,16 +1,24 @@
 import React from "react";
 import CartIcon from "../CartIcon";
 
-const HeaderComponent = ({categories, size, showCart, isCartVisible}) => {
+const HeaderComponent = ({categories, size, showCart, isCartVisible, setIsCartVisible}) => {
     const isActive = (name) => {
         return window.location.pathname === `/${name}`;
     }
+
+    const handleNavClick = (e) => {
+        if (isCartVisible) {
+          e.preventDefault();
+          setIsCartVisible(false);
+        }
+      };
     return (
         <header className={`header ${isCartVisible ? 'blurr': ''}`}>
             <nav>
             {categories && categories.map((categoty, index) => 
             <a 
                 href={`/${categoty.name}`} 
+                onClick={handleNavClick}
                 className={(isActive(categoty.name) || (window.location.pathname === '/' && index === 0)) ? 'active' : ' navogation'} 
                 data-testid={(isActive(categoty.name) || (window.location.pathname === '/' && index === 0)) ? 'active-category-link' : 'category-link'} 
                 key={index}>{categoty.name.toUpperCase()}
