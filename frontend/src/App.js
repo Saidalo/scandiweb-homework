@@ -6,6 +6,7 @@ import HeaderComponent from "./components/HeaderComponent";
 import HomePage from "./components/HomeComponent/HomePage";
 import ProductPage from "./components/ProductPageComponent/ProductPage";
 import { useGlobalState, useGlobalStateUpdate } from "./GlobalStateContext";
+import { useClickOutside } from "./useClickOutside";
 
 function App() {
   const { cart } = useGlobalState(); // Get cart from global state
@@ -48,6 +49,12 @@ function App() {
   }, []);
 
   // Toggle cart visibility
+  useClickOutside({
+    isActive: isCartVisible,
+    onOutsideClick: () => setIsCartVisible(false),
+    ignoreSelectors: [".cart", "header", ".product-card", ".quantity-button"],
+  });
+
   const showCart = () => {
     setIsCartVisible(!isCartVisible);
   };
@@ -100,18 +107,18 @@ function App() {
   const clearCart = () => {
     setGlobalState((prevState) => ({
       ...prevState,
-      cart: [],
+      cart: [], 
     }));
   };
 
   return (
     <div className="App">
-      <HeaderComponent categories={categories} size={cart.length} showCart={showCart} isCartVisible={isCartVisible} />
+      <HeaderComponent categories={categories} size={cart.length} showCart={showCart} isCartVisible={isCartVisible} setIsCartVisible={setIsCartVisible} />
       {isCartVisible && <Cart items={cart} updateItems={updateItems} clearCart={clearCart} />}
       <Routes>
-        <Route path="/" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} />} />
-        <Route path="/:category" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} />} />
-        <Route path="/product/:id" element={<ProductPage setCartItems={addToCart} />} />
+        <Route path="/" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} setIsCartVisible={setIsCartVisible} />} />
+        <Route path="/:category" element={<HomePage isCartVisible={isCartVisible} setCartItems={addToCart} setIsCartVisible={setIsCartVisible} />} />
+        <Route path="/product/:id" element={<ProductPage isCartVisible={isCartVisible} setCartItems={addToCart} />} />
       </Routes>
     </div>
   );

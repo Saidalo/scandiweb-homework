@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import "./ProductPage.css";
 import parse from 'html-react-parser';
 
-const ProductPage = ({setCartItems}) => {
+const ProductPage = ({isCartVisible, setCartItems}) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const params = useParams();
   const [productElement, setProductElement] = useState();
@@ -94,13 +94,10 @@ const ProductPage = ({setCartItems}) => {
   }
 
   function isEmpty(obj) {
-    for (var prop in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, prop)) {
-        return false;
-      }
+    if (product.attributes.length === 0) {
+      return false;
     }
-  
-    return true
+    return product.attributes.length !== Object.keys(obj).length;
   }
 
   const setAttributeValue = (attributeName, attribute) => {
@@ -126,7 +123,7 @@ const ProductPage = ({setCartItems}) => {
     setCartItems(productElement)
   }
   return (
-    <div className="product-page">
+    <div className={`product-page ${isCartVisible ? 'blur' : ''}`}>
       <div className="product-container">
         {/* Left Sidebar */}
         <div className="image-thumbnails">
