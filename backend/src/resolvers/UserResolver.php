@@ -1,7 +1,6 @@
 <?php
-
-
-require_once __DIR__ . '/../Services/UserService.php';
+namespace App\Resolvers;
+use App\Services\UserService;
 
 class UserResolver {
     public static function getUserById($root, $args) {

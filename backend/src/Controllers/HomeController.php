@@ -14,11 +14,16 @@ use App\Services\ProductService;
 
 class HomeController extends Controller {
     public function index() {
-        
+      print_r(Category::all());die();
+
         $rawData = file_get_contents('php://input');
 
         $requestData = json_decode($rawData, true);
-        
+        if (!is_array($requestData) || !isset($requestData['query'])) {
+          http_response_code(400);
+          echo json_encode(['errors' => [['message' => 'Invalid GraphQL request']]]);
+          return;
+        }
         $categoryType = new ObjectType([
             "name" => "Category",
             "description" => "Product Categories",
@@ -113,13 +118,13 @@ class HomeController extends Controller {
                         ],
                         'resolve' => function ($root, $args) {
                             $product = ProductService::assertProductProperties(Product::find($args['id']));
-                            
+
                             return $product[$args['id']];
                         },
                     ],
                 ]
             ]);
-            
+
 
             $mutationType = new ObjectType([
                 'name' => 'Mutation',
@@ -134,24 +139,36 @@ class HomeController extends Controller {
                                 throw new \Exception('Orders input is required.');
                             }
                             $product = new Order($args['orders']);
-                            
+
                             $product->create();
                             return 'success';
                         },
                     ],
                 ],
             ]);
-            
+
             $schema = new Schema([
                 'query' => $queryType,
                 'mutation' => $mutationType
             ]);
 
-            $result = GraphQL::executeQuery($schema, $requestData['query'])->toArray();
-        } catch(\Exception $e) {
+            if (!is_array($requestData) || !isset($requestData['query'])) {
+              http_response_code(400);
+              echo json_encode(['error' => 'Invalid GraphQL request']);
+              return;
+            }
+
+            $result = GraphQL::executeQuery(
+              $schema,
+              $requestData['query'],
+              null,
+              null,
+              $requestData['variables'] ?? null
+            )->toArray();
+        } catch(\Throwable $e) {
             $result = [
                 'error' => [
-                    'message' => $e->getMessage()
+                      ['message' => $e->getMessage()]
                 ]
             ];
         }

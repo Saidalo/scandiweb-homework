@@ -1,6 +1,6 @@
 <?php
-
-require_once __DIR__ . '/../core/Database.php';
+namespace App\Services;
+use App\Core\Database;
 
 class UserService {
     public static function getUserById($id) {
