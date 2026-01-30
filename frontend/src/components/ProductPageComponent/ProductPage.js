@@ -17,7 +17,8 @@ const ProductPage = ({isCartVisible, setCartItems}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
+        const API_URL = process.env.backend_url;
+        const response = await fetch(`${API_URL}/graphql`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

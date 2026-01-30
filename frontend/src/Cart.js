@@ -6,7 +6,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
     const total = items.reduce((accumulator, current) => {
         return accumulator + current?.prices[0].amount
     }, 0);
-
+    const API_URL = process.env.backend_url;
     const isSelected = (attr, selectedAttributes, attrName) => {
         if(attr.display_value === selectedAttributes[attrName]) {
             return 'selected';
@@ -58,7 +58,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
         }
       `;
 
-      fetch("https://scandiweb-backend-mvc9.onrender.com/graphql", {
+      fetch(`${API_URL}/graphql`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +87,7 @@ const Cart = ({ items, updateItems, clearCart }) => {
                 <p className="item-price">${item.prices[0].amount.toFixed(2)}</p>
                 <p className="item-quantity" data-testid='cart-item-amount'>{item.quantity}</p>
               </div>
-              {item.attributes && item.attributes.map((attribute, i) => 
+              {item.attributes && item.attributes.map((attribute, i) =>
                 <div className={`${attribute.name.toLowerCase()}-options`} key={i} data-testid={`cart-item-attribute-${attribute.name}`}>
                     <p>{attribute.name}:</p>
                     {attribute.items.map((attr, idx) => {
