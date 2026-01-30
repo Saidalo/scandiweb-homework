@@ -14,7 +14,6 @@ use App\Services\ProductService;
 
 class HomeController extends Controller {
     public function index() {
-      print_r(Category::all());die();
 
         $rawData = file_get_contents('php://input');
 

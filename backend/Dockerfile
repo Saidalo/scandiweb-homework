@@ -15,10 +15,11 @@ RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install zip
 
+COPY config/certs/ca.pem /var/www/html/certs/ca.pem
 COPY . /var/www/html
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
-# Install Composer, could be improved by installing composer from the registry/artifactory, 
+# Install Composer, could be improved by installing composer from the registry/artifactory,
 # but not from the machine of the person building the image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
